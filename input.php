@@ -36,7 +36,7 @@ $time = $_REQUEST['time'];
 $value = $_REQUEST['value'];
 $sensor_type = $_REQUEST['sensor_type'];
 
-$sql_insert = "INSERT INTO reading VALUES(null, $time, $device_id, $value, '$sensor_type', 1)";
+$sql_insert = "INSERT INTO reading SELECT null, $time, $device_id, $value, '$sensor_type', locationID FROM device WHERE deviceID = $device_id";
 echo $sql_insert;   
 
 $password = "Links550";
