@@ -1,0 +1,1 @@
+scp input.php se414024@weather.cs.nuim.ie:/var/www/weather/
