@@ -49,7 +49,7 @@ CREATE TABLE Reading
 	ReadingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Time int NOT NULL, 
 	Value int NOT NULL,
-	SensorID int NOT NULL, #add constrain to sensor spec table
+	SensorID int NOT NULL,
 	LocationID int NOT NULL,
 	CONSTRAINT fk_SensorID FOREIGN KEY (SensorID) REFERENCES Sensor(SensorID),
 	CONSTRAINT fk_ReadingsLocationID FOREIGN KEY (LocationID) REFERENCES Location(LocationID)	
