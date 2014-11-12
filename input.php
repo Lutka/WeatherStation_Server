@@ -6,6 +6,7 @@
 define (rc_successful, 200);
 define (rc_bad_request, 404);
 define (rc_server_error, 500);
+define (rc_duplicate, 409);
 
 //to prevent sql injection 
 //validation of the input
@@ -57,8 +58,16 @@ or die (mysqli_connect_error());
     }
     else
     {
-	  http_response_code(rc_server_error);
-      echo "Error: " . mysqli_error($connect);
+		if(mysqli_errno($connect) == 1062)
+		{
+			http_response_code(rc_duplicate);
+			echo "Error: Duplicate Entry ";
+		}
+		else
+		{
+		  http_response_code(rc_server_error);
+		  echo "Error: " . mysqli_error($connect);
+		}
     }
  }
   mysqli_close($connect);   
