@@ -47,10 +47,12 @@ CREATE TABLE Sensor
 CREATE TABLE Reading
 (
 	ReadingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	Time int NOT NULL, 
-	Value int NOT NULL,
 	SensorID int NOT NULL,
+	Time int NOT NULL, 
+	Value int NOT NULL,	
 	LocationID int NOT NULL,
 	CONSTRAINT fk_SensorID FOREIGN KEY (SensorID) REFERENCES Sensor(SensorID),
 	CONSTRAINT fk_ReadingsLocationID FOREIGN KEY (LocationID) REFERENCES Location(LocationID)	
 );
+
+ALTER TABLE reading ADD UNIQUE unique_reading(SesorID, time);
