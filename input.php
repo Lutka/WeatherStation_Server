@@ -33,12 +33,6 @@ if(!is_numeric($_REQUEST['value']))
   exit("Invalid value");
 }
 
-/* if(!is_numeric($_REQUEST['location_id']))
-{
-  http_response_code(rc_bad_request);
-  exit("location_id");
-} */
-
 $sensor_id = $_REQUEST['sensor_id']; 
 $time = $_REQUEST['time'];
 $value = $_REQUEST['value'];
@@ -50,14 +44,14 @@ or die (mysqli_connect_error());
 echo ("<p>Connected to database.</p>");
 
 $sql_insert = "INSERT INTO reading SELECT null, ?, ? ,?, locationID FROM sensor join device using (deviceID) WHERE sensorID = ?";
-echo $sql_insert;  
 
 $reading = mysqli_prepare($connect, $sql_insert);
-echo "Reading test" ;
 mysqli_stmt_bind_param($reading, "dddd", $sensor_id, $time, $value, $sensor_id);
  
- if($connect) {
-    if(mysqli_stmt_execute($reading)) {
+if($connect) 
+{
+    if(mysqli_stmt_execute($reading)) 
+	{
 	   http_response_code(rc_successful); 
        echo "New record added";
     }
@@ -74,8 +68,8 @@ mysqli_stmt_bind_param($reading, "dddd", $sensor_id, $time, $value, $sensor_id);
 		  echo "Error: " . mysqli_error($connect);
 		}
     }
- }
-  mysqli_close($connect);   
+}
+ mysqli_close($connect);   
 
 ?>
 
