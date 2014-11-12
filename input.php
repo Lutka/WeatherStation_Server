@@ -1,7 +1,7 @@
 
 <?php
 
-//http://weather.cs.nuim.ie/input.php?device_id=1&time=1414532294&value=23&sensor_type=T
+//http://weather.cs.nuim.ie/input.php?sensor_id=1&time=1414532294&value=23
 
 define (rc_successful, 200);
 define (rc_bad_request, 404);
@@ -9,10 +9,10 @@ define (rc_server_error, 500);
 
 //to prevent sql injection 
 //validation of the input
-if(!is_numeric($_REQUEST['device_id']))
+if(!is_numeric($_REQUEST['sensor_id']))
 {
   http_response_code(rc_bad_request);
-  exit("Invalid device_id");  
+  exit("Invalid sensor_id");  
 }
 
 if(!is_numeric($_REQUEST['time']))
@@ -27,22 +27,18 @@ if(!is_numeric($_REQUEST['value']))
   exit("Invalid value");
 }
 
-$sensor_type_arr=array("T","H");
-
-if(!in_array($_REQUEST['sensor_type'], $sensor_type_arr)) 
+/* if(!is_numeric($_REQUEST['location_id']))
 {
   http_response_code(rc_bad_request);
-  
-  //('[A-Z]', $_REQUEST['sensor_type'])) {
-  exit($_REQUEST['sensor_type']." is invalid sensor_type");
-}
+  exit("location_id");
+} */
 
-$device_id = $_REQUEST['device_id'];
+$sensor_id = $_REQUEST['sensor_id'];
 $time = $_REQUEST['time'];
 $value = $_REQUEST['value'];
-$sensor_type = $_REQUEST['sensor_type'];
+//$location_id = $_REQUEST['location_id'];
 
-$sql_insert = "INSERT INTO reading SELECT null, $time, $device_id, $value, '$sensor_type', locationID FROM device WHERE deviceID = $device_id";
+$sql_insert = "INSERT INTO reading SELECT null, $sensor_id, $time, $value, locationID FROM sensor join device using (deviceID) WHERE sensorID = $sensor_id";
 echo $sql_insert;   
 
 $password = "Links550";
