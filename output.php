@@ -21,8 +21,8 @@ or die (mysqli_connect_error());
 #echo ("<p>Connected to database.</p>");
 echo ("<p>Weather Station Readings</p>");
 
-$query = "SELECT * FROM reading ORDER BY time LIMIT 100";
-$result = mysqli_query($connect, $query)
+$query = "SELECT * FROM reading ORDER BY time DESC LIMIT 100";  
+$result = mysqli_query($connect, $query) 
 or die (mysqli_error($connect));
 
 
@@ -38,14 +38,14 @@ echo "<table class='table table-hover'>
 </thead>";
  while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
 { 
+	$date=gmdate("Y-m-d\ | H:i:s\ ", $row[Time]);
 	echo"<tr> 
 	<td> $row[ReadingID] </td>
 	<td> $row[SensorID] </td>
-	<td> $row[Time] </td>
+	<td> $date </td>   
 	<td> $row[Value] </td>
 	<td> $row[LocationID] </td> 
-	</tr>";
-	
+	</tr>";	
 } 
 
 echo "</table>";
