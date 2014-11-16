@@ -55,4 +55,5 @@ CREATE TABLE Reading
 	CONSTRAINT fk_ReadingsLocationID FOREIGN KEY (LocationID) REFERENCES Location(LocationID)	
 );
 
+# to exclude duplicate entries
 ALTER TABLE reading ADD UNIQUE unique_reading(SesorID, time);
