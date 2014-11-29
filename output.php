@@ -1,24 +1,18 @@
 
 <?php
-
-#login details
-$password = "Links550"; 
-$username = "paulina";
-$database = "weather";
-
-$connect = mysqli_connect("localhost", $username, $password, $database)
-or die (mysqli_connect_error());
-
+include("connect.php");
 
 $q_readings = "SELECT * FROM reading 
 JOIN location USING(locationID)
 JOIN sensor USING(sensorID)
 JOIN sensorspec USING(specID)
-JOIN sensortype USING(typeID)"; 
+JOIN sensortype USING(typeID)
+ORDER BY time"; 
 $result = mysqli_query($connect, $q_readings) 
 or die (mysqli_error($connect));
 
-$array = array(); 
+$temperatureArray = array(); 
+$humidityArray = array();
  while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
 { 
 	#cast in order to have values in json as integers, so without quotes
@@ -35,9 +29,17 @@ $array = array();
 	$row["Minimum"] = intval($row["Minimum"]);
 	$row["Maximum"] = intval($row["Maximum"]); 
 	
-	$array[] = $row;
+	if($row["TypeID"] == "T") 
+	{
+		$temperatureArray[] = $row; 
+	}
+	else
+	{
+		$humidityArray[] = $row;
+	}
 } 
-$feed["readings"] = $array;
+$feed["TemperatureReadings"] = $temperatureArray;
+$feed["HumidityReadings"] = $humidityArray;
 
 echo json_encode($feed);
 
