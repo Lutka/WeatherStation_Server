@@ -2,13 +2,13 @@
 <?php
 
 include("connect.php");
-echo ("<p>Connected to database.</p>");
+
 //http://weather.cs.nuim.ie/input.php?sensor_id=1&time=1414532294&value=23
 
-define (rc_successful, 200);
-define (rc_bad_request, 404);
-define (rc_server_error, 500);
-define (rc_duplicate, 409);
+define ("rc_successful", 200);
+define ("rc_bad_request", 404);
+define ("rc_server_error", 500);
+define ("rc_duplicate", 409);
 
 //to prevent sql injection 
 //validation of the input
@@ -44,13 +44,15 @@ mysqli_stmt_bind_param($reading, "dddd", $sensor_id, $time, $value, $sensor_id);
  
 if($connect) 
 {
+echo "I am connected";
     if(mysqli_stmt_execute($reading)) 
 	{
 	   http_response_code(rc_successful); 
        echo "New record added";
     }
     else
-    {
+    {	
+		echo "Duplicate error" . mysqli_errno($connect);  
 		if(mysqli_errno($connect) == 1062)
 		{
 			http_response_code(rc_duplicate);
