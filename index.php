@@ -79,13 +79,26 @@ for($i=0; $i < sizeof($readings); $i++)
 	$row=$readings[$i]; 
 
 	$date=gmdate("Y-m-d\ | H:i:s\ ", $row["time"]);
-	echo"<tr> 
-	<td> $date </td> 
-	<td> $row[comment] </td>	
-	<td> $row[temperature] </td>
-	<td> $row[humidity] </td>		 
-	<td> $row[deviceType] </td>
-	</tr>";	
+	if($row["deviceType"] == 'r')
+	{
+	echo"<tr bgcolor='#6cc534'>
+		<td> $date </td> 
+		<td> $row[comment] </td>	
+		<td> $row[temperature] </td>
+		<td> $row[humidity] </td>		 
+		<td> $row[deviceType] </td>
+		</tr>";	
+	}
+	else
+	{
+		echo"<tr> 
+		<td> $date </td> 
+		<td> $row[comment] </td>	
+		<td> $row[temperature] </td>
+		<td> $row[humidity] </td>		 
+		<td> $row[deviceType] </td>
+		</tr>";	
+	}
 } 
 
 echo "</table>";
