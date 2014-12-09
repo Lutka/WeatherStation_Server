@@ -6,7 +6,6 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 </head>
-<html>
 <body>
 
 <?php
@@ -103,5 +102,5 @@ for($i=0; $i < sizeof($readings); $i++)
 
 echo "</table>";
 ?>
-<body>
+</body>
 </html>
