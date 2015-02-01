@@ -6,13 +6,16 @@ $q_readings = "SELECT * FROM reading
 JOIN location USING(locationID)
 JOIN sensor USING(sensorID)
 JOIN sensorspec USING(specID)
-JOIN sensortype USING(typeID)
-ORDER BY time"; 
+JOIN sensortype USING(typeID)  
+ORDER BY time";  
 $result = mysqli_query($connect, $q_readings) 
 or die (mysqli_error($connect));
 
-$temperatureArray = array(); 
-$humidityArray = array();
+$temperatureRealArray = array(); 
+$humidityRealArray = array();
+$temperatureForecastArray = array();
+$humidityForecastArray = array();
+
  while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
 { 
 	#cast in order to have values in json as integers, so without quotes
@@ -29,17 +32,29 @@ $humidityArray = array();
 	$row["Minimum"] = intval($row["Minimum"]);
 	$row["Maximum"] = intval($row["Maximum"]); 
 	
-	if($row["TypeID"] == "T") 
+	if($row["TypeID"] == "T" && ($row["SensorID"] == "3" || $row["SensorID"] == "9") ) 
 	{
-		$temperatureArray[] = $row; 
+		$temperatureRealArray[] = $row; 
 	}
-	else
+
+	if($row["TypeID"] == "T" && $row["SensorID"] == "7") 
 	{
-		$humidityArray[] = $row;
+		$temperatureForecastArray[] = $row; 
+	}
+	if($row["TypeID"] == "H" && ($row["SensorID"] == "4" || $row["SensorID"] == "10")) 
+	{
+		$humidityRealArray[] = $row;
+	}
+	
+	if($row["TypeID"] == "H" && $row["SensorID"] == "8") 
+	{
+		$humidityForecastArray[] = $row; 
 	}
 } 
-$feed["TemperatureReadings"] = $temperatureArray;
-$feed["HumidityReadings"] = $humidityArray;
+$feed["TemperatureReadings"] = $temperatureRealArray;
+$feed["HumidityReadings"] = $humidityRealArray;
+$feed["TemperatureForecast"] = $temperatureForecastArray;
+$feed["HumidityForecast"] = $humidityForecastArray;
 
 echo json_encode($feed);
 
