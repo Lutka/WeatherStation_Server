@@ -32,21 +32,20 @@ $humidityForecastArray = array();
 	$row["Minimum"] = intval($row["Minimum"]);
 	$row["Maximum"] = intval($row["Maximum"]); 
 	
-	if($row["TypeID"] == "T" && ($row["SensorID"] == "3" || $row["SensorID"] == "9") ) 
+	if($row["TypeID"] == "T" && ($row["SensorID"] == "1" || $row["SensorID"] == "5") ) 
 	{
 		$temperatureRealArray[] = $row; 
 	}
 
-	if($row["TypeID"] == "T" && $row["SensorID"] == "7") 
+	if($row["TypeID"] == "T" && $row["SensorID"] == "3") 
 	{
 		$temperatureForecastArray[] = $row; 
 	}
-	if($row["TypeID"] == "H" && ($row["SensorID"] == "4" || $row["SensorID"] == "10")) 
+	if($row["TypeID"] == "H" && ($row["SensorID"] == "2" || $row["SensorID"] == "6")) 
 	{
 		$humidityRealArray[] = $row;
-	}
-	
-	if($row["TypeID"] == "H" && $row["SensorID"] == "8") 
+	}	
+	if($row["TypeID"] == "H" && $row["SensorID"] == "4") 
 	{
 		$humidityForecastArray[] = $row; 
 	}
