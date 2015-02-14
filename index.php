@@ -92,7 +92,7 @@ for($i=0; $i < sizeof($readings); $i++)
 	}
 	else
 	{
-		echo"<tr> 
+		echo"<tr bgcolor='#eff67b'> 
 		<td> $date </td> 
 		<td> $row[comment] </td>	
 		<td> $row[temperature] &degC </td>
