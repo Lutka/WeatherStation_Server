@@ -13,7 +13,10 @@
 include("connect.php");
 
 #echo ("<p>Connected to database.</p>");
-echo ("<p>Weather Station Readings</p>");
+echo ("<p>Weather Station Readings</p>
+<p>r - real readings</p>
+<p>f - forecast data</p>");  
+
 
 $query = "SELECT time, value, reading.locationID, sensorSpec.typeID, device.deviceType, location.comment
 FROM reading
@@ -22,8 +25,8 @@ JOIN device USING(deviceID)
 JOIN location ON(reading.locationID= location.locationID)
 JOIN sensorSpec USING (specID)
 JOIN sensorType USING (typeID)
-ORDER BY time DESC LIMIT 200";    
-$result = mysqli_query($connect, $query) 
+ORDER BY time DESC";    
+$result = mysqli_query($connect, $query)  
 or die (mysqli_error($connect));
 
 $readings=array();
@@ -45,8 +48,7 @@ $lastReading=null;
 			}
 			continue;
 		}
-	} 
-	
+	} 	
 	
 	if($row[typeID] =='H')
 	{	
@@ -83,8 +85,8 @@ for($i=0; $i < sizeof($readings); $i++)
 	echo"<tr bgcolor='#6cc534'>
 		<td> $date </td> 
 		<td> $row[comment] </td>	
-		<td> $row[temperature] </td>
-		<td> $row[humidity] </td>		 
+		<td> $row[temperature] &degC </td>
+		<td> $row[humidity] % </td>		 
 		<td> $row[deviceType] </td>
 		</tr>";	
 	}
@@ -93,8 +95,8 @@ for($i=0; $i < sizeof($readings); $i++)
 		echo"<tr> 
 		<td> $date </td> 
 		<td> $row[comment] </td>	
-		<td> $row[temperature] </td>
-		<td> $row[humidity] </td>		 
+		<td> $row[temperature] &degC </td>
+		<td> $row[humidity] % </td>		 
 		<td> $row[deviceType] </td>
 		</tr>";	
 	}
