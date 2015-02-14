@@ -62,10 +62,10 @@ $lastReading=null;
 echo "<table class='table table-hover'>
 <thead>
 	<tr>
-		<th>Time</th>
-		<th>Value</th>
-		<th>Measurement Type</th>
-		<th>Reading Type</th>
+		<th>Time,
+		Value,
+		Measurement Type,
+		Reading Type</th>
 	</tr>
 </thead>";
 
@@ -74,43 +74,43 @@ for($i=0; $i < sizeof($readings); $i++)
 { 
 	$row=$readings[$i]; 
 
-	$date=gmdate("Y-m-d\ | H:i:s\ ", $row["time"]);
+	$date= $row["time"];
 	if($row["deviceType"] == 'r' && $row[typeID] =='T')
 	{
 		echo"<tr bgcolor='#6cc534'>
-		<td> $date </td>	
-		<td> $row[value] </td>	
-		<td> $row[typeID] </td>
-		<td> $row[deviceType] </td>
+			<td> $row[time], 	
+			 $row[value], 	
+			 $row[typeID],
+			 $row[deviceType] </td>
 		</tr>";	
 	}
 	else if($row["deviceType"] == 'f' && $row[typeID] =='T')
 	{
 		echo"<tr bgcolor='#6cc534'>
-		<td> $date </td>	
-		<td> $row[value] </td>	
-		<td> $row[typeID] </td>
-		<td> $row[deviceType] </td>
+			<td> $row[time], 	
+			 $row[value], 	
+			 $row[typeID],
+			 $row[deviceType] </td>
 		</tr>";	
 	}
 	else if($row["deviceType"] == 'r' && $row[typeID] =='H')
 	{
 		echo"<tr bgcolor='#6cc534'>
-		<td> $date </td>	
-		<td> $row[value] </td>	
-		<td> $row[typeID] </td>
-		<td> $row[deviceType] </td>
-		</tr>";	
+			<td> $row[time], 	
+			 $row[value], 	
+			 $row[typeID],
+			 $row[deviceType] </td>
+		</tr>";		
 	}
 	
 	else if($row["deviceType"] == 'f' && $row[typeID] =='H')
 	{
 		echo"<tr bgcolor='#6cc534'>
-		<td> $date </td>	
-		<td> $row[value] </td>	
-		<td> $row[typeID] </td>
-		<td> $row[deviceType] </td>
-		</tr>";	
+			<td> $row[time], 	
+			 $row[value], 	
+			 $row[typeID],
+			 $row[deviceType] </td>
+		</tr>";		
 	}
 	
 } 
