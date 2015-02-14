@@ -86,7 +86,7 @@ for($i=0; $i < sizeof($readings); $i++)
 	}
 	else if($row["deviceType"] == 'f' && $row[typeID] =='T')
 	{
-		echo"<tr bgcolor='#6cc534'>
+		echo"<tr bgcolor='#ccff99'>
 			<td> $row[time], 	
 			 $row[value], 	
 			 $row[typeID],
@@ -95,7 +95,7 @@ for($i=0; $i < sizeof($readings); $i++)
 	}
 	else if($row["deviceType"] == 'r' && $row[typeID] =='H')
 	{
-		echo"<tr bgcolor='#6cc534'>
+		echo"<tr bgcolor='#ffad33'>
 			<td> $row[time], 	
 			 $row[value], 	
 			 $row[typeID],
@@ -105,7 +105,7 @@ for($i=0; $i < sizeof($readings); $i++)
 	
 	else if($row["deviceType"] == 'f' && $row[typeID] =='H')
 	{
-		echo"<tr bgcolor='#6cc534'>
+		echo"<tr bgcolor='#ffcc66'>
 			<td> $row[time], 	
 			 $row[value], 	
 			 $row[typeID],
