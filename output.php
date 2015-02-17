@@ -2,17 +2,20 @@
 <?php
 include("connect.php");
 
-$q_readings = "SELECT * FROM reading 
+$q_readings = "SELECT * FROM(
+SELECT * FROM reading 
 JOIN location USING(locationID)
-JOIN sensor USING(sensorID)
+JOIN sensor USING(sensorID) 
 JOIN sensorspec USING(specID)
 JOIN sensortype USING(typeID)  
-ORDER BY time";  
-$result = mysqli_query($connect, $q_readings) 
+ORDER BY time DESC LIMIT 800
+) sub
+ORDER BY time ASC";  
+$result = mysqli_query($connect, $q_readings)  
 or die (mysqli_error($connect));
 
 $temperatureRealArray = array(); 
-$humidityRealArray = array();
+$humidityRealArray = array();  
 $temperatureForecastArray = array();
 $humidityForecastArray = array();
 
