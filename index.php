@@ -9,7 +9,6 @@
 <body>
 
 <?php
-
 include("connect.php");
 
 #echo ("<p>Connected to database.</p>");
@@ -17,7 +16,7 @@ echo ("<p>Weather Station Readings</p>
 <p>r - real readings</p>
 <p>f - forecast data</p>");  
 
-
+#database query
 $query = "SELECT time, value, reading.locationID, sensorSpec.typeID, device.deviceType, location.comment
 FROM reading
 JOIN sensor USING (sensorID) 
@@ -72,9 +71,9 @@ echo "<table class='table table-hover'>
 		<th>Humidity</th>
 		<th>Type</th>
 	</tr>
-</thead>";
+</thead>";  
 
-###time, value, reading.locationID, sensorSpec.typeID, device.deviceType, location.comment
+###time,location.comment, value, units, device.deviceType, 
 for($i=0; $i < sizeof($readings); $i++) 
 { 
 	$row=$readings[$i]; 
@@ -98,7 +97,7 @@ for($i=0; $i < sizeof($readings); $i++)
 		<td> $row[temperature] &degC </td>
 		<td> $row[humidity] % </td>		 
 		<td> $row[deviceType] </td>
-		</tr>";	
+		</tr>";	 
 	}
 } 
 

@@ -1,4 +1,3 @@
-
 <?php
 include("connect.php");
 
@@ -35,7 +34,8 @@ $humidityForecastArray = array();
 	$row["Minimum"] = intval($row["Minimum"]);
 	$row["Maximum"] = intval($row["Maximum"]); 
 	
-	if($row["TypeID"] == "T" && ($row["SensorID"] == "1" || $row["SensorID"] == "5") ) 
+	//store values in the appropriate array
+	if($row["TypeID"] == "T" && ($row["SensorID"] == "1" || $row["SensorID"] == "5")) 
 	{
 		$temperatureRealArray[] = $row; 
 	}
@@ -59,5 +59,4 @@ $feed["TemperatureForecast"] = $temperatureForecastArray;
 $feed["HumidityForecast"] = $humidityForecastArray;
 
 echo json_encode($feed);
-
 ?>

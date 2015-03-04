@@ -9,7 +9,6 @@
 <body>
 
 <?php
-
 include("connect.php");
 
 #echo ("<p>Connected to database.</p>");

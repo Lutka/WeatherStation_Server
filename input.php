@@ -1,6 +1,4 @@
-
 <?php
-
 include("connect.php");
 
 //http://weather.cs.nuim.ie/input.php?sensor_id=1&time=1414532294&value=23
@@ -42,16 +40,17 @@ $sql_insert = "INSERT INTO reading SELECT null, ?, ? ,?, locationID FROM sensor 
 $reading = mysqli_prepare($connect, $sql_insert);
 mysqli_stmt_bind_param($reading, "dddd", $sensor_id, $time, $value, $sensor_id);
  
+//getting appropriate response_code
 if($connect) 
 {
-echo "I am connected";
-    if(mysqli_stmt_execute($reading)) 
+	echo "I am connected";
+	if(mysqli_stmt_execute($reading)) 
 	{
-	   http_response_code(rc_successful); 
-       echo "New record added";
-    }
-    else
-    {	
+		http_response_code(rc_successful); 
+		echo "New record added";
+	}
+	else
+	{	
 		echo "Duplicate error" . mysqli_errno($connect);  
 		if(mysqli_errno($connect) == 1062)
 		{
@@ -63,10 +62,9 @@ echo "I am connected";
 		  http_response_code(rc_server_error);
 		  echo "Error: " . mysqli_error($connect);
 		}
-    }
+	}
 }
- mysqli_close($connect);   
-
+mysqli_close($connect);   
 ?>
 
 
