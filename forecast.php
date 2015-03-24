@@ -26,11 +26,6 @@ $sensor_id_h=4;
 
 $sql_insert = "INSERT INTO reading SELECT null, ?, ? ,?, locationID FROM sensor join device using (deviceID) WHERE sensorID = ?";
 
-//chyba  przydalo by sie wziac najnowszy czas i pozniej patrzec na wartosci,
-// ktore maja tylko wiekszy czas - nowszy
-
-//$currentTime = 1317641200;
-//count($obj->list)
 for ($i = 0; $i < count($obj->list); $i++)
 {
 	$time =($obj->list[$i]->dt);	

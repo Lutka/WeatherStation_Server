@@ -1,15 +1,12 @@
 <?php
 include("connect.php");
-
 //http://weather.cs.nuim.ie/input.php?sensor_id=1&time=1414532294&value=23
-
 define ("rc_successful", 200);
 define ("rc_bad_request", 404);
 define ("rc_server_error", 500);
 define ("rc_duplicate", 409);
 
-//to prevent sql injection 
-//validation of the input
+//to prevent sql injection: validation of the input
 if(!is_numeric($_REQUEST['sensor_id']))
 {
   http_response_code(rc_bad_request);
@@ -66,6 +63,3 @@ if($connect)
 }
 mysqli_close($connect);   
 ?>
-
-
-

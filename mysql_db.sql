@@ -1,4 +1,3 @@
-
 CREATE TABLE Location
 (
 	LocationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -13,6 +12,7 @@ CREATE TABLE Device
 (
 	DeviceID int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	LocationID int NOT NULL,
+	DeviceType char(1) NOT NULL,
 	CONSTRAINT fk_locationID FOREIGN KEY (LocationID) REFERENCES Location(LocationID)
 );
 

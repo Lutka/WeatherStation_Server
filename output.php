@@ -7,7 +7,7 @@ JOIN location USING(locationID)
 JOIN sensor USING(sensorID) 
 JOIN sensorspec USING(specID)
 JOIN sensortype USING(typeID)  
-ORDER BY time DESC LIMIT 800
+ORDER BY time DESC LIMIT 800 
 ) sub
 ORDER BY time ASC";  
 $result = mysqli_query($connect, $q_readings)  
