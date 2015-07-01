@@ -1,7 +1,7 @@
 <?php
 include("connect.php");
 $temperatureQuery = "SELECT time, value as forecast, 
-(SELECT  value FROM reading AS readingObserved  where sensorID=5  AND ABS(readingObserved.time - reading.time) < 300 LIMIT 1) AS observed 
+(SELECT value FROM reading AS readingObserved  where sensorID = 5 AND ABS(readingObserved.time - reading.time) < 300 LIMIT 1) AS observed 
 FROM reading 
 JOIN sensor USING (sensorID) 
 JOIN sensorSpec USING (specID)
@@ -11,7 +11,7 @@ having observed is not null
 ORDER BY time DESC";    
 
 $humidityQuery = "SELECT time, value as forecast, 
-(SELECT  value FROM reading AS readingObserved  where sensorID=6  AND ABS(readingObserved.time - reading.time) < 300 LIMIT 1) AS observed 
+(SELECT value FROM reading AS readingObserved  where sensorID = 6 AND ABS(readingObserved.time - reading.time) < 300 LIMIT 1) AS observed 
 FROM reading 
 JOIN sensor USING (sensorID) 
 JOIN sensorSpec USING (specID)
