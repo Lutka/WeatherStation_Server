@@ -26,10 +26,10 @@ ORDER BY time DESC";
 $result = mysqli_query($connect, $query)  
 or die (mysqli_error($connect));
 
-$readings=array();
-$lastReading=null;
+$readings = array();
+$lastReading = null;
 
- while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
+ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
 {	
 	if($lastReading != null)
 	{
@@ -49,7 +49,7 @@ $lastReading=null;
 	
 	if($row[typeID] =='H')
 	{	
-		$row["humidity"]=$row["value"];
+		$row["humidity"] = $row["value"];
 	}	
 	else ##($row[typeID] =='T')
 	{
