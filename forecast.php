@@ -8,27 +8,27 @@ $obj = json_decode($json);
 
 $locationComment = ($obj->city->name);
 
-$lat =($obj->city->coord->lat);
+$lat = ($obj->city->coord->lat);
 //print_r($lat);
-$lon =($obj->city->coord->lon);
+$lon = ($obj->city->coord->lon);
 //print_r($lon);
 
 $sql_time = "SELECT time FROM reading WHERE sensorID IN (3, 4) ORDER BY time DESC LIMIT 1";
 $result = mysqli_query($connect, $sql_time) 
 or die (mysqli_error($connect));
 
-if($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
-	$timeStamp=$row['time'];  
+if($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
+	$timeStamp = $row['time'];  
 	echo $timeStamp;
 	
-$sensor_id_t=3;
-$sensor_id_h=4;
+$sensor_id_t = 3;
+$sensor_id_h = 4;
 
 $sql_insert = "INSERT INTO reading SELECT null, ?, ? ,?, locationID FROM sensor join device using (deviceID) WHERE sensorID = ?";
 
 for ($i = 0; $i < count($obj->list); $i++)
 {
-	$time =($obj->list[$i]->dt);	
+	$time = ($obj->list[$i]->dt);	
 	
 	if($time > $timeStamp) 
 	{
