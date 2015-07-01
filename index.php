@@ -26,10 +26,10 @@ ORDER BY time DESC";
 $result = mysqli_query($connect, $query)  
 or die (mysqli_error($connect));
 
-$readings=array();
-$lastReading=null;
+$readings = array();
+$lastReading = null;
 
- while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) 
+ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
 {	
 	if($lastReading != null)
 	{
@@ -49,15 +49,15 @@ $lastReading=null;
 	
 	if($row[typeID] =='H')
 	{	
-		$row["humidity"]=$row["value"];
+		$row["humidity"] = $row["value"];
 	}	
 	else ##($row[typeID] =='T')
 	{
 		$row["temperature"] = $row["value"];
 	}
 	
-	$lastReading=$row;
-	$readings[]=$lastReading;
+	$lastReading = $row;
+	$readings[] = $lastReading;
 }
 
 echo "<table class='table table-hover'>
@@ -72,11 +72,11 @@ echo "<table class='table table-hover'>
 </thead>";  
 
 ###time,location.comment, value, units, device.deviceType, 
-for($i=0; $i < sizeof($readings); $i++) 
+for($i = 0; $i < sizeof($readings); $i++) 
 { 
-	$row=$readings[$i]; 
+	$row = $readings[$i]; 
 
-	$date=gmdate("Y-m-d\ | H:i:s\ ", $row["time"]);
+	$date = gmdate("Y-m-d\ | H:i:s\ ", $row["time"]);
 	if($row["deviceType"] == 'r')
 	{
 	echo"<tr bgcolor='#6cc534'>
